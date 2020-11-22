@@ -1,0 +1,207 @@
+600543200|1|Women'S T-Shirt|9.00
+600552843|1|Women'S T-Shirt,Earring|16.23
+600552844|1|Lingerie,Storage Rack|18.86
+600552848|1|Women'S Sweater,Women'S Jacket|19.41
+600552851|1|Necklace,Men'S Sweater|18.86
+600552853|1|Women'S Dress|4.91
+600552854|1|Women'S Jacket,Phone Case,Storage Box|18.03
+600552855|1|Women'S Dress,Women'S Skirt|12.30
+600552865|1|Makeup Brush,Baking mold,Men'S Sweater|21.40
+600552868|1|Women'S Jumpsuit,Women'S T-Shirt|10.65
+600552870|1|Women'S Jumpsuit,Women'S Jacket,Keychain|12.92
+600552873|1|Women'S Suit|16.67
+600552876|1|Puff,Backpack,Earring,Wallet|16.70
+600552878|1|Clock,Phone Case,Pet rope,Lamp|16.74
+600552879|1|Women'S T-Shirt|4.09
+600552889|1|Women'S Dress,Pillowcase,Women'S Nightdress,Puff|18.04
+600552893|1|Lamp|3.28
+600552894|1|Women'S Sweater|13.94
+600552899|1|Men'S Sweater,Keychain,Women'S Suit,Blouse|20.49
+600552912|1|Men'S Sweater,Hair Accessories|16.67
+600552913|1|Blouse,Women'S Dress|19.68
+600552916|1|Headgear,Women'S Sweater,Women'S T-Shirt|19.67
+600552923|1|Massager,Pillowcase,Necklace,Ring,Makeup Brush|21.93
+600552928|1|Phone Case,Kitchen Supplies,Women'S Sweater|17.22
+600552933|1|Sunglasses|5.74
+600552940|1|Decoration,Storage Basket|18.86
+600552942|1|Phone Case|2.46
+600552953|1|Women'S Suit|17.22
+600552956|1|Lamp|15.58
+600552957|1|Women'S Pants,Women'S T-Shirt|18.84
+600552961|1|Women'S Pants|18.04
+600552967|1|Girl Pants,Women'S Sweater|20.50
+600552970|1|Women'S T-Shirt,Women'S Pants|17.21
+600552974|1|Women'S Skirt|2.79
+600552979|1|Women'S Skirt|6.56
+600552982|1|Shoes|19.26
+600552983|1|Lingerie,Women'S Underwear|18.11
+600552987|1|plastic Protective Case|4.92
+600552991|1|Handbag|4.10
+600552992|1|Phone Case,Storage Box,Pull Rope|6.56
+600552996|1|Belt,Cosmetic Bag|5.86
+600552997|1|Women'S Sweater,Handbag,Ring|17.22
+600552998|1|Women'S Jumpsuit,Women'S Sweater|21.32
+600553002|1|Nail Tool,Lingerie,Women'S Underwear|19.68
+600553008|1|Sock,Wall Sticker,Lamp|21.32
+600553013|1|Shoes|20.50
+600553014|1|Women'S Sweater,Women'S Jacket|15.69
+600553017|1|Women'S Jacket,Milk Paste,Women'S Suit|18.12
+600553019|1|Necklace,Earring|5.74
+600553022|1|Makeup Brush|6.56
+600553023|1|Women'S Sweater,Women'S T-Shirt|16.45
+600553024|1|Hair Accessories,Women'S Dress,Necklace,Women'S Jacket,Women'S Skirt|17.18
+600553042|1|Women'S Dress,Women'S T-Shirt|11.05
+600553049|1|Women'S Suit|18.04
+600553050|1|Tape,Sticker,Seal,Correction Tape|21.33
+600553051|1|Men'S Pajamas Set|19.68
+600553055|1|Storage Bag,Women'S T-Shirt,Blouse|20.05
+600553057|1|Women'S Suit|21.32
+600553060|1|Necklace,Phone Case,Headgear,Belt|15.58
+600553062|1|Makeup Brush|2.43
+600553065|1|Necklace,Shoes|20.50
+600553069|1|Women'S Jacket|21.65
+600553070|1|Men'S Pants|16.40
+600553076|1|Women'S Pants|20.50
+600553079|1|Storage Bag|14.76
+600553081|1|Necklace,Blouse|15.58
+600553084|1|Women'S Pajamas Set,Waterproof Shoe Cover|9.01
+600553085|1|Storage Box|1.64
+600553086|1|Women'S Jumpsuit|4.43
+600553092|1|Men'S Pants|20.50
+600553096|1|Women'S Jacket|14.76
+600553100|1|Women'S Jacket|16.22
+600553101|1|Sheets|18.04
+600553107|1|Earring,Headgear,Necklace|15.58
+600553112|1|Belt|3.28
+600553117|1|Women'S Pajamas Set|16.40
+600553118|1|Women'S T-Shirt,Women'S Sweater|17.21
+600553124|1|Shoes|9.09
+600553126|1|Men'S Vest,Women'S T-Shirt|18.43
+600553134|1|Necklace,Earring,Women'S Suit|19.16
+600553137|1|Women'S Pajamas Set,Women'S Nightdress|17.22
+600553145|1|Women'S T-Shirt,Women'S Jacket|20.06
+600553149|1|Pillow,Women'S Sweater,Decoration,Wall Sticker,Clip|18.85
+600553154|1|Men'S Pants|13.12
+600553158|1|Blouse,Women'S Sweater|17.86
+600553166|1|Necklace,Women'S T-Shirt,Cosmetic Bag|17.20
+600553169|1|Women'S Sweater|14.14
+600553171|1|Women'S T-Shirt,Crossbody Bag,Wall Sticker|19.65
+600553172|1|Paintbrush|3.28
+600553185|1|Crossbody Bag,Belt|10.66
+600553191|1|Mask,Cleaning Brush,Makeup Brush,Sunglasses|15.58
+600553194|1|Earring,Women'S T-Shirt|16.80
+600553195|1|Women'S Sweater|13.12
+600553198|1|Women'S T-Shirt,Blouse,Earring|9.83
+600553200|1|Women'S Dress,Women'S Pants|16.38
+600553202|1|Women'S Sweater,Necklace,Women'S Vest|17.17
+600553206|1|Women'S Pants,Lingerie|19.65
+600553213|1|Ring,Handbag|16.97
+600553223|1|Women'S Sweater,Women'S T-Shirt|20.49
+600553225|1|Women'S Jumpsuit|15.58
+600553226|1|Men'S Sweater,Sock|20.50
+600553227|1|Women'S Jacket|16.40
+600553231|1|Women'S T-Shirt,Women'S Suit|20.66
+600553239|1|Women'S Jacket|20.50
+600553243|1|Women'S Dress,Women'S Pants,Ring,Earring,Imitation Jewelry|20.16
+600553251|1|Lingerie,Necklace,Women'S Jumpsuit|19.68
+600553252|1|Blouse,Women'S Jacket|17.01
+600553253|1|Earring,Women'S T-Shirt,Women'S Suit|16.96
+600553256|1|Women'S Jacket|14.23
+600553259|1|Men'S Sweater,Women'S Sweater|16.38
+600553265|1|Women'S Dress,Decoration|17.22
+600553267|1|Women'S Nightgown|3.84
+600553271|1|Hair scraper,Women'S Sweater,Belt|16.40
+600553274|1|Waterproof Shoe Cover,Kitchen Supplies,Headgear|19.68
+600553280|1|Men'S Sweater,Headgear|17.22
+600553281|1|Women'S T-Shirt,Women'S Sweater|16.38
+600553282|1|Lingerie,Milk Paste,Sock,Women'S Suit|21.43
+600553283|1|Men'S Sweater,Women'S Pants|11.99
+600553287|1|Headgear|3.28
+600553288|1|Sheets|15.58
+600553289|1|Hair Accessories,Girl Pants|18.04
+600553290|1|Women'S T-Shirt,Handbag|14.74
+600553291|1|Table cover,Pillow,Baking mold|17.22
+600553293|1|Storage Box|1.64
+600553296|1|plastic Protective Case,Phone Case,Women'S T-Shirt|18.30
+600553300|1|Men'S Vest|7.38
+600553301|1|Women'S Pants,Necklace|15.58
+600553303|1|Women'S T-Shirt|2.04
+600553305|1|Stationery,Pencil,Eraser,Hairpiece|15.67
+600553307|1|Necklace,Nail Patch,Women'S T-Shirt,Ring|17.20
+600553320|1|Girl Sweater,Girl Dress,Women'S Jumpsuit|10.98
+600553325|1|Pillowcase,Sheets|21.32
+600553327|1|Women'S Pants|15.58
+600553330|1|Sock,Women'S Dress|18.86
+600553332|1|Women'S Sweater,Women'S Jacket|20.50
+600553339|1|Women'S Pajamas Set,Decoration|17.22
+600553340|1|Women'S Suit|15.58
+600553345|1|Women'S Sweater,Puff|16.40
+600553347|1|Shoes|18.04
+600553350|1|Lamp,Lingerie,Women'S Jumpsuit,Women'S Dress,Women'S T-Shirt|16.22
+600553353|1|Men'S Sweater,Ring|18.45
+600553358|1|Imitation Jewelry,Sock,Mobile Phone Holder|19.56
+600553359|1|Women'S Pajamas Set|11.48
+600553361|1|face pack,Makeup Brush,Women'S Sweater|16.40
+600553369|1|Women'S Pajamas Set|12.32
+600553372|1|Humidifier,Lamp,Sticker|15.58
+600553385|1|Blouse,plastic Protective Case,Men'S Sweater|21.72
+600553390|1|Ring|1.64
+600553392|1|Women'S Pants,Women'S Sweater,Sock|20.50
+600553393|1|Girls Shirt,Girl Sweater|16.40
+600553399|1|Belt,Necklace,Women'S T-Shirt|19.66
+600553406|1|Women'S Pajamas Set|10.66
+600553407|1|Earring|16.40
+600553411|1|Women'S Pants,Blouse|11.48
+600553412|1|Women'S Pajamas Set|20.92
+600553415|1|Women'S Pajamas Set|16.40
+600553416|1|Wallet|4.48
+600553419|1|Blouse,Women'S Sweater|18.86
+600553420|1|Women'S Pants,Women'S Skirt,Women'S T-Shirt|19.01
+600553422|1|Women'S Jacket|16.25
+600553423|1|Phone Case,Bathroom Supplies,Cosmetic Bag,Puff|18.04
+600553426|1|Necklace|9.02
+600553442|1|Mobile Phone Holder,Storage Bag,Lamp,Phone Case,Imitation Jewelry|16.40
+600553444|1|Sheets|21.32
+600553450|1|Women'S Skirt,Women'S Dress|16.40
+600553455|1|Pet apparel,Storage Bag,Women'S Pants|15.58
+600553457|1|Women'S Suit|11.81
+600553459|1|Girl Suit,Baking mold,Storage Rack,Belt|19.67
+600553466|1|Daily gloves,Kitchen Supplies|4.92
+600553472|1|Women'S Pajamas Set|13.94
+600553473|1|Lingerie|17.21
+600553477|1|Blouse,Women'S Jacket|16.29
+600553479|1|Women'S Suit|15.58
+600553491|1|Women'S Sweater,Women'S Jacket|4.91
+600553501|1|Men'S Pajamas Set,Headgear|9.84
+600553505|1|Belt|2.95
+600553506|1|Blouse|13.12
+600553509|1|Women'S Underwear,Women'S Skirt,Clock,Lingerie,Storage Rack|20.67
+600553511|1|Women'S Sweater,Women'S T-Shirt,Imitation Jewelry,Headgear|16.39
+600553512|1|Women'S T-Shirt,Women'S Skirt,Lingerie|18.85
+600553518|1|Ring,Lamp,face pack,Women'S Sweater,Belt|18.03
+600556580|1|Women'S Sweater,Belt,Hair Accessories,Necklace,Women'S Pants|39.37
+600557129|1|Earring|5.74
+600557261|1|Women'S Jacket,Shoes,Tattoo Sticker,Hair Accessories,Earring|96.43
+600557373|1|Women'S Swimsuit,Shoes|3.03
+600557384|1|Belt,Crossbody Bag,Waist Bag|12.65
+600557729|1|Women'S T-Shirt,Headgear,Women'S Dress|10.65
+600558106|1|Mask|9.84
+600558173|1|Women'S Jacket,Handbag|25.29
+600558382|1|Women'S Sweater|27.06
+600558789|1|Women'S Pants,Women'S Jacket|36.58
+600559027|1|Phone Case,Storage Box|3.28
+600559031|1|Women'S Jacket,Women'S Dress,Blouse,Sunglasses|39.77
+600559043|1|Blouse,Women'S Dress|20.21
+600559052|1|Women'S Jacket,Hair Accessories,Women'S T-Shirt|27.99
+800004517|1|Necklace|4.10
+800004520|1|Phone Case|1.64
+800004522|1|Storage Box|0.99
+800004524|1|Headgear,Women'S Suit|21.32
+800004529|1|Baking mold,Sock,Women'S T-Shirt|11.47
+800004531|1|Headgear,Brooch,Women'S Jumpsuit|19.68
+800004534|1|Hanger,Girl'S Jumpsuit,Wall Sticker,Lamp|20.50
+800004537|1|Pillow,Wall Sticker,Lamp|15.58
+800004547|1|Women'S Dress|18.04
+800004548|1|Women'S Pajamas Set|17.22
+800004551|||
+800004562|1|Women'S T-Shirt,Women'S Dress|17.21

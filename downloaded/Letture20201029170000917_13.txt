@@ -1,0 +1,13 @@
+600493022|1|Women'S Nightdress|4.10
+600495918|1|Blouse,Card Cover|5.14
+600495919|1|Women'S Pants,Women'S Dress,Women'S T-Shirt|15.68
+600495920|1|Necklace,Women'S T-Shirt,Women'S Sweater|18.03
+600495921|1|Women'S Dress|28.70
+600495922|1|Women'S Pajamas Set,Lingerie,Men'S Pajamas Set|28.05
+600495923|1|Women'S Sweater,Men'S Sweater|19.52
+600495925|1|Women'S Vest,Women'S Pants,Women'S Sweater,Women'S T-Shirt|28.15
+800002656|1|Shoes,Women'S Vest,Blouse|20.04
+800002657|1|Women'S T-Shirt,Earring,Women'S Pants|28.77
+800002658|1|Women'S T-Shirt,Sheets|16.39
+800002659|1|Carpet,Kitchen Supplies,Makeup Mirror,Storage Rack,Water Cup|19.68
+800002660|1|Women'S T-Shirt,Women'S Jacket|11.41
