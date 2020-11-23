@@ -1,19 +1,30 @@
-from threading import local
 from flask import Flask, render_template, url_for
-from apscheduler.schedulers.background import BackgroundScheduler
 from flask_apscheduler import APScheduler
+from flask_mail import Mail, Message
 from ftplib import FTP
-from numpy.core.numeric import NaN
 import psycopg2
 from datetime import datetime
 import pandas as pd
 import numpy as np
 import os
 import fileinput
-import atexit
-from collections import Counter
 
 scheduler = APScheduler()
+
+app = Flask(__name__, static_url_path='/static')
+app.config['DEBUG'] = True
+app.config['TESTING'] = False
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+app.config['MAIL_PORT'] = 587
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USE_SSL'] = False
+app.config['MAIL_USERNAME'] = '***'
+app.config['MAIL_PASSWORD'] = '***'
+app.config['MAIL_DEFAULT_SENDER'] = '***'
+app.config['MAIL_MAX_EMAILS'] = None
+app.config['MAIL_ASCII_ATTACHMENTS'] = False
+
+mail = Mail(app)
 
 # database
 hostname = 'localhost'
@@ -30,8 +41,8 @@ pwd = 'fmD384jaFdUKJSAV'
 
 
 def same_date(mdtm):
-    today = datetime(2020, 11, 18)  # get today's date
-    # today = datetime.today()
+    # today = datetime(2020, 11, 18)  # get today's date
+    today = datetime.today()
     return mdtm.date() == today.date()
 
 
@@ -64,7 +75,11 @@ def sendemail(ftp_obj):
 
 
 def download_files(ftp_obj, newfiles_list):
-    dir_path = os.path.dirname(os.path.abspath(__file__)) + "\\downloaded\\"
+    if not os.path.exists('downloaded'):
+        os.makedirs('downloaded')
+    else:
+        return
+    dir_path = os.path.dirname(os.path.abspath(__file__)) + "/downloaded/"
     local_path = dir_path
     newfiles_list = ftp_obj.nlst()
 
@@ -82,6 +97,10 @@ def download_files(ftp_obj, newfiles_list):
         # ftp_obj.delete(filename)
         print(file + ' deleted')
 
+    if not os.path.exists('output'):
+        os.makedirs('output')
+    else:
+        return
     with open("output/output.txt", 'w') as fout, fileinput.input(newfiles_list_path) as fin:
         for line in fin:
             fout.write(line)
@@ -94,9 +113,13 @@ def after_download():
 
         cursor = cnn.cursor()
         cwd = os.getcwd()
+        if not os.path.exists('output'):
+            os.makedirs('output')
+        else:
+            return
         df = pd.read_csv(
-            cwd + "\\output\\output.txt", sep='|', names=["invoice_number",
-                                                          "quantity", "description", "value"])
+            cwd + "/output/output.txt", sep='|', names=["invoice_number",
+                                                        "quantity", "description", "value"])
 
         invoice_number_ftp = df['invoice_number'].tolist()
         for i in range(0, len(invoice_number_ftp)):
@@ -146,12 +169,7 @@ def ftp_check():
     print("FTP Connection Established at " + str(datetime.now()))
     new_files = newfile_check(ftp)
 
-    # if not new_files:
-    #     print('No new file detected')
-    #     ftp.quit()
-    #     return
-
-    # download_files(ftp, new_files)  # operations on download files
+    download_files(ftp, new_files)  # operations on download files
     after_download()
 
 
@@ -163,6 +181,9 @@ def checkNeworNot():
     ftp.set_pasv(True)
     newfile = newfile_check(ftp)
     if not newfile:
+        msg_no_new_file = Message('No new file today!', recipients=[
+            'example@gmail.com'])
+        mail.send(msg_no_new_file)
         print('NO NEW FILE! SEND EMAIL!')
         ftp.quit()
         return
@@ -170,14 +191,16 @@ def checkNeworNot():
 
 ftp_check()
 
-# if __name__ == '__main__':
-#     app = Flask(__name__, static_url_path='/static')
 
-#     @app.route('/')
-#     def index():
-#         return render_template('index.html')
-#     scheduler.api_enabled = True
-#     scheduler.init_app(app)
-#     scheduler.start()
+@app.route('/')
+def index():
+    return render_template('index.html')
 
-#     app.run()
+
+scheduler.api_enabled = True
+scheduler.init_app(app)
+scheduler.start()
+
+if __name__ == "__main__":
+    with app.app_context():
+        app.run()
