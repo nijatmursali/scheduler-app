@@ -3,12 +3,15 @@ from flask import Flask, render_template, url_for
 from apscheduler.schedulers.background import BackgroundScheduler
 from flask_apscheduler import APScheduler
 from ftplib import FTP
+from numpy.core.numeric import NaN
 import psycopg2
 from datetime import datetime
 import pandas as pd
+import numpy as np
 import os
 import fileinput
 import atexit
+from collections import Counter
 
 scheduler = APScheduler()
 
@@ -96,6 +99,15 @@ def after_download():
                                                           "quantity", "description", "value"])
 
         invoice_number_ftp = df['invoice_number'].tolist()
+        for i in range(0, len(invoice_number_ftp)):
+            if len(str(i)) != 9 and int(str(i)[:1] != 6):
+                pass
+                # print("discard!")
+            else:
+                #invoice_number_ftp[i] = int(invoice_number_ftp[i])
+                pass
+
+        # print(invoice_number_ftp)
 
         cursor.execute(
             "SELECT number FROM bdm.available_invoices")
@@ -104,12 +116,21 @@ def after_download():
         for inum in row:
             invoice_number_db.append(inum[0])  # convert to list
 
-        final = [i for i in invoice_number_ftp if i in invoice_number_db]
+        # checking for present values
+        final_present = [
+            i for i in invoice_number_ftp if i in invoice_number_db]
+        for i in range(0, len(final_present)):
+            final_present[i] = int(final_present[i])
 
-        for i in range(0, len(final)):
-            final[i] = int(final[i])
+        # checking for not present values
+        final_notpresent = list(np.setdiff1d(
+            invoice_number_ftp, invoice_number_db))
+        final_notpresent = [x for x in final_notpresent if ~np.isnan(x)]
+        for i in range(0, len(final_notpresent)):
+            final_notpresent[i] = int(
+                final_notpresent[i])  # SEND THIS AS EMAIL
 
-        print(final)
+        # print(final_notpresent)
 
     except (Exception, psycopg2.DatabaseError) as error:
         print("Error while selecting table", error)
