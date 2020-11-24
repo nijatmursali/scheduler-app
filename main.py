@@ -199,20 +199,49 @@ ftp_check()
 
 ################################# THIS PART IS FOR SESSIONS #################################
 
+# check if dir exists
+
+
+def directory_exists(ftp, dir):
+    filelist = []
+    ftp.retrlines('LIST', filelist.append)
+    for f in filelist:
+        if f.split()[-1] == dir and f.upper().startswith('D'):
+            return True
+    return False
+
 
 @app.route('/', methods=["POST", 'GET'])
 def do_stuff():
+
     start = ""
     check = ""
     close = ""
     count = ""
     isStarted = False
+
     if request.method == 'POST':
         if request.form['submit'] == 'submit_start':
+
+            ## ftp things ##
+            ftp = FTP()
+            ftp.connect(host, portftp)
+            ftp.login(usr, pwd)
+            ftp.set_pasv(True)
+
+            crtDir = '/session_start'
+            if directory_exists(ftp, crtDir) is True:
+                ftp.mkd(crtDir)
+            else:
+                ftp.cwd(crtDir)
+
+            ftp.retrlines('LIST')  # will be in session_start folder
+
             now = datetime.now()
             curr_time = now.strftime("%H:%M:%S")
             session['isstarted'] = not isStarted
             #print("Current Time =", curr_time)
+
             start = 'Session started'
             if 'isstarted' in session:
                 isStarted = session['isstarted']
