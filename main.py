@@ -131,8 +131,13 @@ def after_download():
             str(int(i[0]))) == 9 and str(int(i[0]))[0:1] == '6']
 
         ### INSERT TO DATABASE ###
-        qry = 'INSERT INTO bdm.invoices(invoice_number, quantity, description, value) VALUES (%s, %s, %s, %s);'
-        cursor.executemany(qry, invoice_number_todb)
+        try:
+            qry = """INSERT INTO bdm.invoices(invoice_number, quantity, description, value) VALUES (%s, %s, %s, %s);"""
+            cursor.executemany(qry, invoice_number_todb)
+            cnn.commit()
+        except (Exception, psycopg2.Error) as error:
+            if(cnn):
+                print("Failed to insert record into table", error)
 
         cursor.execute(
             "SELECT number FROM bdm.available_invoices")
@@ -153,10 +158,7 @@ def after_download():
         final_notpresent = [x for x in final_notpresent if ~np.isnan(x)]
         for i in range(0, len(final_notpresent)):
             final_notpresent[i] = int(
-                final_notpresent[i])  # SEND THIS AS EMAIL
-
-        # print(final_notpresent)
-
+                final_notpresent[i])  # SEND THIS AS EMAIL ###
     except (Exception, psycopg2.DatabaseError) as error:
         print("Error while selecting table", error)
 

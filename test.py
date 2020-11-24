@@ -34,5 +34,10 @@ invoice_number_todb = list()
 invoice_number_todb = [i for i in invoice_number_ftp if len(
     str(int(i[0]))) == 9 and str(int(i[0]))[0:1] == '6']
 
-qry = 'INSERT INTO bdm.invoices(invoice_number, quantity, description, value) VALUES (%s, %s, %s, %s);'
-cursor.executemany(qry, invoice_number_todb)
+try:
+    qry = """INSERT INTO bdm.invoices(invoice_number, quantity, description, value) VALUES (%s, %s, %s, %s);"""
+    cursor.executemany(qry, invoice_number_todb)
+    cnn.commit()
+except (Exception, psycopg2.Error) as error:
+    if(cnn):
+        print("Failed to insert record into mobile table", error)
