@@ -12,6 +12,10 @@ import os
 from ftplib import FTP
 import fileinput
 
+from psycopg2._psycopg import DatabaseError
+
+from sessions import SessionState
+
 scheduler = APScheduler()
 
 app = Flask(__name__, static_url_path='/static')
@@ -136,7 +140,20 @@ def after_download():
 
         ### INSERT TO DATABASE ###
         try:
-            qry = """INSERT INTO bdm.invoices(invoice_number, quantity, description, value) VALUES (%s, %s, %s, %s);"""
+            cursor.execute("""
+INSERT INTO bdm.sessions (upload_date, current_state, manual_upload)
+VALUES (now()::timestamptz, %s, FALSE) RETURNING id;
+            """, (SessionState.NEW,))
+            session_id_row = cursor.fetchone()
+            if not session_id_row:
+                raise DatabaseError("Cannot insert session.")
+            session_id = session_id_row[0]
+
+            # TODO: Remove the string injection and create
+            #       `invoice_number_todb` as a list of tuples, each
+            #       containing the session_id as well - wasteful but
+            #       simplifies things a lot.
+            qry = f"""INSERT INTO bdm.invoices(invoice_number, quantity, description, value, session_id) VALUES (%s, %s, %s, %s, {session_id});"""
             cursor.executemany(qry, invoice_number_todb)
             cnn.commit()
         except (Exception, psycopg2.Error) as error:
@@ -274,6 +291,9 @@ def do_stuff():
             close = 'Session closed!'
             print("Session closed!")
 
+    # TODO: Render the template graying out buttons that should not be
+    #       in use (like session start if there's no suitable session
+    #       to work on, etc.) - see check_suitable_session_availability.
     return render_template('index.html', start=start, check=check, count=count, close=close)
 
 
