@@ -12,10 +12,28 @@
 
 <body>
     <div class="centered">
-        <button class="btn btn-primary mr-2">Start Session</button>
-        <button class="btn btn-primary mr-2">Check Session</button>
-        <button class="btn btn-primary mr-2">Close Session</button>
-        <button class="btn btn-primary mr-2">Manual Upload</button>
+        <form action="{{ url_for('do_stuff')}}" method="POST">
+            <input class='btn btn-primary mr-2' type="submit" value="submit_start" name="submit"><br>
+        </form>
+        <form action="{{ url_for('do_stuff')}}" method="POST">
+            <input class='btn btn-primary mr-2' type="submit" value="submit_check" name="submit"><br>
+        </form>
+        <form action="{{ url_for('do_stuff')}}" method="POST">
+            <input class='btn btn-primary mr-2' type="submit" value="submit_close" name="submit"><br>
+        </form>
+    </div>
+    <div class="row justify-content-center">
+        <div>
+            <h2>{{start}}</h2>
+            <h2>{{check}}
+                <hr>
+                <div class="row justify-content-center">
+                    <h2>{{count}}</h2>
+                </div>
+            </h2>
+            <h2>{{close}}</h2>
+
+        </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.5.1.js"
         integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>

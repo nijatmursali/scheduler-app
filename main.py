@@ -1,17 +1,20 @@
-from flask import Flask, render_template, url_for
 from flask_apscheduler import APScheduler
 from flask_mail import Mail, Message
-from ftplib import FTP
-import psycopg2
-from datetime import datetime
-import pandas as pd
+from flask.globals import session
 import numpy as np
+from pandas import DataFrame
+import pandas as pd
+import psycopg2
+from flask import Flask, render_template, url_for, redirect, request, session
+from datetime import datetime
+import time
 import os
-import fileinput
+from ftplib import FTP
 
 scheduler = APScheduler()
 
 app = Flask(__name__, static_url_path='/static')
+app.config['SECRET_KEY'] = 'SECRET'
 app.config['DEBUG'] = True
 app.config['TESTING'] = False
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
@@ -185,9 +188,8 @@ def checkNeworNot():
     ftp.set_pasv(True)
     newfile = newfile_check(ftp)
     if not newfile:
-        msg_no_new_file = Message('No new file today!', recipients=[
-            'example@gmail.com'])
-        mail.send(msg_no_new_file)
+        # msg_no_new_file = Message('No new file today!', recipients=['example@gmail.com'])
+        # mail.send(msg_no_new_file)
         print('NO NEW FILE! SEND EMAIL!')
         ftp.quit()
         return
@@ -195,10 +197,57 @@ def checkNeworNot():
 
 ftp_check()
 
+################################# THIS PART IS FOR SESSIONS #################################
 
-@app.route('/')
-def index():
-    return render_template('index.html')
+
+@app.route('/', methods=["POST", 'GET'])
+def do_stuff():
+    start = ""
+    check = ""
+    close = ""
+    count = ""
+    isStarted = False
+    if request.method == 'POST':
+        if request.form['submit'] == 'submit_start':
+            now = datetime.now()
+            curr_time = now.strftime("%H:%M:%S")
+            session['isstarted'] = not isStarted
+            #print("Current Time =", curr_time)
+            start = 'Session started'
+            if 'isstarted' in session:
+                isStarted = session['isstarted']
+                if isStarted == True:
+                    if request.form['submit'] == 'submit_start':
+                        start = 'Session already started!'
+                else:
+                    start = 'Session successfully started!'
+        if request.form['submit'] == 'submit_check':
+            cnn = psycopg2.connect(
+                host=hostname, user=username, password=password, dbname=database, port=portdb)
+            try:
+                cursor = cnn.cursor()
+                curr_time = str(time.strftime("%Y-%m-%d"))
+                #curr_time = '2020-11-20'
+                print(curr_time)
+                qry = """SELECT COUNT(*) FROM bdm.processing WHERE process_date=%s;"""
+                cursor.execute(qry, (curr_time,))
+                cnn.commit()
+
+                count = (list(cursor.fetchall()))[0][0]
+                print(count)
+            except (Exception, psycopg2.Error) as error:
+                if(cnn):
+                    print("Failed to fetch data!", error)
+            check = 'Session checked!'
+
+        if request.form['submit'] == 'submit_close':
+            close = 'Session closed!'
+            print("Session closed!")
+
+    return render_template('index.html', start=start, check=check, count=count, close=close)
+
+
+################################# END OF SESSIONS #################################
 
 
 scheduler.api_enabled = True
@@ -207,4 +256,4 @@ scheduler.start()
 
 if __name__ == "__main__":
     with app.app_context():
-        app.run()
+        app.run(debug=True)
