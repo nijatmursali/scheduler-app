@@ -10,6 +10,7 @@ from datetime import datetime
 import time
 import os
 from ftplib import FTP
+import fileinput
 
 scheduler = APScheduler()
 
