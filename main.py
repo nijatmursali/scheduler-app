@@ -121,16 +121,18 @@ def after_download():
             cwd + "/output/output.txt", sep='|', names=["invoice_number",
                                                         "quantity", "description", "value"])
 
-        invoice_number_ftp = df['invoice_number'].tolist()
-        for i in range(0, len(invoice_number_ftp)):
-            if len(str(i)) != 9 and int(str(i)[:1] != 6):
-                pass
-                # print("discard!")
-            else:
-                #invoice_number_ftp[i] = int(invoice_number_ftp[i])
-                pass
+        df = df.drop_duplicates()
+        df = df.fillna(0)
+        df['invoice_number'] = df['invoice_number'].astype(int)
+        invoice_number_ftp = df.values.tolist()
+        invoice_number_ftp = [i for i in invoice_number_ftp if ~np.isnan(i[0])]
+        invoice_number_todb = list()
+        invoice_number_todb = [i for i in invoice_number_ftp if len(
+            str(int(i[0]))) == 9 and str(int(i[0]))[0:1] == '6']
 
-        # print(invoice_number_ftp)
+        ### INSERT TO DATABASE ###
+        qry = 'INSERT INTO bdm.invoices(invoice_number, quantity, description, value) VALUES (%s, %s, %s, %s);'
+        cursor.executemany(qry, invoice_number_todb)
 
         cursor.execute(
             "SELECT number FROM bdm.available_invoices")
