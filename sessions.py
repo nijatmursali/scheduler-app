@@ -59,7 +59,8 @@ SELECT id FROM bdm.sessions WHERE current_state = %s ORDER BY upload_date DESC
             # TODO: Move this to a stored procedure to let PostgreSQL
             #       handle integrity checks itself.
             if cursor.fetchone():
-                raise DatabaseError(f"More than one session is in the `{state.name}` state.")
+                raise DatabaseError(
+                    f"More than one session is in the `{state.name}` state.")
 
             return last_session_id
 
@@ -91,7 +92,6 @@ def do_stuff():
     check = ""
     close = ""
     count = ""
-    isStarted = False
 
     if request.method == 'POST':
         if request.form['submit'] == 'submit_start':
@@ -107,9 +107,51 @@ def do_stuff():
                     with connection.cursor() as cursor:
                         cursor.execute("""UPDATE bdm.sessions SET current_state = %s WHERE id = %s""",
                                        (SessionState.OPENED, session_id))
+                        ftp = FTP()
+                        ftp.connect(host, portftp)
+                        ftp.login(usr, pwd)
+                        ftp.set_pasv(True)
 
-                        # New session opened, generate entries, perform
-                        # upload
+                        crtDir = '/session_start'
+                        if directory_exists(ftp, crtDir) is True:
+                            ftp.mkd(crtDir)
+                        else:
+                            ftp.cwd(crtDir)
+
+                            # will be in session_start folder
+                        ftp.retrlines('LIST')
+
+                        now = datetime.now()
+                        #curr_time = str(time.strftime("%Y-%m-%d"))
+                        curr_time = '2020-11-20'
+                        # LT<invoice number><invoice destination>|<weight * 1000>|0|0|0||GN|<current year-month-day>|<current hour-minute-seconds-centiseconds>|0|0|0|0|0||||||0|1|0|
+                        qry = """SELECT "number", destination_branch, date, partial, weight FROM bdm.available_invoices WHERE date=%s;"""
+                        cursor.execute(qry, (curr_time,))
+                        connection.commit()
+
+                        toFTP = (list(cursor.fetchall()))
+                        list_of_lists = [list(elem) for elem in toFTP]
+                        # print(list_of_lists)
+                        df = pd.DataFrame(list_of_lists, columns=[
+                            "number", "destination_branch", "date", "partial", "weight"])
+                        df['invoices'] = 'LT' + \
+                            df['number'].astype(
+                                str) + df['destination_branch'].astype(str)
+
+                        df['weight'] = df['weight'] * 1000
+                        df['time_day'] = str(time.strftime("%Y-%m-%d"))
+                        df['time_hour'] = str(time.strftime(
+                            "%H-%M-%S-" + str(now.second*100)))
+
+                        df = df[['invoices', 'weight', 'time_day', 'time_hour']]
+                        print(df)
+
+                        df.to_csv('output/out.csv', sep='|', header=False,
+                                  index=False, encoding='utf-8')
+                        filename = "out.csv"
+                        with open(filename, "rb") as file:
+                            ftp.storbinary(f"STOR {filename}", file)
+                        ftp.retrlines('LIST')
                         ...
 
                         connection.commit()
@@ -119,35 +161,7 @@ def do_stuff():
             # new session gets should be already opened at this time.
             #
             # Closed sessions are not kept into account.
-
-
-            # ## ftp things ##
-            # ftp = FTP()
-            # ftp.connect(host, portftp)
-            # ftp.login(usr, pwd)
-            # ftp.set_pasv(True)
-            #
-            # crtDir = '/session_start'
-            # if directory_exists(ftp, crtDir) is True:
-            #     ftp.mkd(crtDir)
-            # else:
-            #     ftp.cwd(crtDir)
-            #
-            # ftp.retrlines('LIST')  # will be in session_start folder
-            #
-            # now = datetime.now()
-            # curr_time = now.strftime("%H:%M:%S")
-            # session['isstarted'] = not isStarted
-            # #print("Current Time =", curr_time)
-            #
             # start = 'Session started'
-            # if 'isstarted' in session:
-            #     isStarted = session['isstarted']
-            #     if isStarted == True:
-            #         if request.form['submit'] == 'submit_start':
-            #             start = 'Session already started!'
-            #     else:
-            #         start = 'Session successfully started!'
         if request.form['submit'] == 'submit_check':
             session_id, state = check_suitable_session_availability()
             if session_id is not None and state == SessionState.OPENED:
@@ -171,7 +185,8 @@ FROM processed_total p,
 
                         totals_row = cursor.fetchone()
                         if not totals_row:
-                            raise DatabaseError(f"Cannot obtain totals for session {session_id}.")
+                            raise DatabaseError(
+                                f"Cannot obtain totals for session {session_id}.")
 
                         # TODO: Put these in the template
                         processed, total = totals_row
